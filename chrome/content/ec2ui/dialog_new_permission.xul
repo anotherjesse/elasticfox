@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+
+<dialog id="ec2ui.dialog.newpermission" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="accept,cancel" ondialogaccept="return ec2_Authorizer.authorize();" ondialogcancel="return true;"
+	onload="ec2_Authorizer.init();" title="Add Permission" buttonlabelaccept="Add">
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/newpermissiondialog.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/model.js" />
+
+	<vbox flex="1">
+		<grid flex="1">
+			<columns>
+				<column />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label control="ec2ui.newpermission.group" value="Security Group:" />
+					<textbox id="ec2ui.newpermission.group" size="40" value="1" readonly="true" />
+				</row>
+			</rows>
+		</grid>
+		<groupbox>
+			<caption label="Source" />
+			<menulist id="ec2ui.newpermission.sourcetype">
+				<menupopup>
+					<menuitem label="CIDR" value="cidr" oncommand="ec2_Authorizer.selectSourceTypeDeck(0);" />
+					<menuitem label="User and Group" value="usergroup"
+						oncommand="ec2_Authorizer.selectSourceTypeDeck(1);" />
+				</menupopup>
+			</menulist>
+			<deck id="ec2ui.newpermission.deck.sourcetype" selectedIndex="0">
+				<vbox flex="1">
+					<hbox flex="1">
+						<label control="ec2ui.newpermission.source.cidr" value="CIDR" />
+						<textbox id="ec2ui.newpermission.source.cidr" size="20" value="0.0.0.0/0" />
+					</hbox>
+					<groupbox>
+						<caption label="Protocol Details" />
+						<menulist id="ec2ui.newpermission.protocol">
+							<menupopup>
+								<menuitem label="TCP/IP" value="tcp" oncommand="ec2_Authorizer.selectProtocolDeck(0);" />
+								<menuitem label="UDP/IP" value="udp" oncommand="ec2_Authorizer.selectProtocolDeck(0);" />
+								<menuitem label="ICMP" value="icmp" oncommand="ec2_Authorizer.selectProtocolDeck(1);" />
+							</menupopup>
+						</menulist>
+						<deck id="ec2ui.newpermission.deck.protocol" selectedIndex="0">
+							<vbox flex="1">
+								<hbox flex="1">
+									<label control="ec2ui.newpermission.fromport" value="From port" />
+									<textbox id="ec2ui.newpermission.fromport" size="10" value="0" />
+									<label control="ec2ui.newpermission.toport" value="to" />
+									<textbox id="ec2ui.newpermission.toport" size="10" value="65535" />
+								</hbox>
+								<spacer flex="10" />
+							</vbox>
+							<grid flex="1">
+								<columns>
+									<column />
+									<column />
+								</columns>
+								<rows>
+									<row>
+										<label control="ec2ui.newpermission.icmptype" value="ICMP Type" />
+										<textbox id="ec2ui.newpermission.icmptype" size="10" value="-1" />
+									</row>
+									<row>
+										<label control="ec2ui.newpermission.icmpcode" value="ICMP Code" />
+										<textbox id="ec2ui.newpermission.icmpcode" size="10" value="-1" />
+									</row>
+								</rows>
+							</grid>
+						</deck>
+					</groupbox>
+				</vbox>
+				<grid flex="1">
+					<columns>
+						<column />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label control="ec2ui.newpermission.source.user" value="User ID" />
+							<textbox id="ec2ui.newpermission.source.user" size="20" value="" flex="0" />
+						</row>
+						<row>
+							<label control="ec2ui.newpermission.source.group" value="Group" />
+							<textbox id="ec2ui.newpermission.source.group" size="20" value="" />
+						</row>
+					</rows>
+				</grid>
+			</deck>
+		</groupbox>
+	</vbox>
+</dialog>
+

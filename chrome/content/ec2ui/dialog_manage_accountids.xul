@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+
+<dialog id="ec2ui.dialog.manageaccountids" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="cancel" ondialogcancel="return true;"
+	onload="ec2ui_accountIdManager.initDialog();" title="Manage Account IDs" buttonlabelcancel="Close">
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/utils.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/preferences.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/model.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/accountid_manager.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/accountidsview.js" />
+
+	<vbox flex="1">
+		<grid>
+			<columns>
+				<column />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label control="ec2ui.accountids.accountid" value="Account ID:" />
+					<hbox>
+						<textbox id="ec2ui.accountids.accountid" size="20" />
+					</hbox>
+				</row>
+				<row>
+					<label control="ec2ui.accountids.displayname" value="Display Name:" />
+					<hbox>
+						<textbox id="ec2ui.accountids.displayname" size="40" />
+					</hbox>
+				</row>
+				<hbox flex="1" pack="center">
+					<button label="Add" onclick="ec2ui_accountIdManager.saveAccount();" />
+					<button label="Remove" onclick="ec2ui_accountIdManager.removeAccount();" />
+				</hbox>
+			</rows>
+		</grid>
+
+		<vbox flex="1">
+			<tree id="ec2ui.accountids.view" onselect="ec2ui_accountIdManager.selectMapping();" flex="1" rows="5">
+				<treecols>
+					<treecol id="accountids.accountid" label="Account ID" flex="1" persist="width ordinal hidden" />
+					<treecol id="accountids.displayname" label="Display Name" flex="1" persist="width ordinal hidden" />
+				</treecols>
+				<treechildren />
+			</tree>
+		</vbox>
+	</vbox>
+
+</dialog>
+

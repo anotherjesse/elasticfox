@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<?xul-overlay href="chrome://ec2ui/content/amis_tab_overlay.xul"?>
+<?xul-overlay href="chrome://ec2ui/content/keypairs_tab_overlay.xul"?>
+<?xul-overlay href="chrome://ec2ui/content/security_groups_tab_overlay.xul"?>
+
+<!DOCTYPE window SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+<window id="s3-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml" width="800" height="600" title="EC2 Firefox UI" orient="vertical"
+	persist="width height screenX screenY sizemode" onload="ec2ui_session.initialize()">
+
+	<!-- Third party libraries -->
+	<script type="application/x-javascript" src="chrome://ec2ui/content/sha1.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/base64.js" />
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/utils.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/strftime.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/model.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/client.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/keypairview.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/instancesview.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/securitygroupsview.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/permissionsview.js" />
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/preferences.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/amisview.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/controller.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/session.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/accountid_manager.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/tools_manager.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/credential_manager.js" />
+	<script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js" />
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="ec2ui.properties.bundle" src="chrome://ec2ui/locale/ec2ui.properties" />
+	</stringbundleset>
+
+	<vbox flex="1">
+
+		<toolbar style="padding: 0px 1px; -moz-box-align: center">
+			<toolbarbutton label="&ec2ui.credentials.manage.label;" image="images/credentials.png"
+				oncommand="ec2ui_session.manageCredentials();"  tooltiptext="&ec2ui.credentials.tip;" />
+			<toolbarbutton label="&ec2ui.tools.manage.label;" image="images/tools.png"
+				oncommand="ec2ui_session.manageTools();"  tooltiptext="&ec2ui.tools.tip;" />
+			<menulist id="ec2ui.active.credentials.list" style="min-width: 30em" label=" " oncommand="ec2ui_session.switchCredentials();">
+				<menupopup />
+			</menulist>
+			<toolbarbutton label="&ec2ui.accountids.manage.label;" image="images/accountids.png"
+				oncommand="ec2ui_session.manageAccountIds();"  tooltiptext="&ec2ui.accountids.tip;" />
+			<toolbarseparator />
+			<spacer flex="10" />
+			<toolbarbutton label="&ec2ui.about.label;" image="images/about.png"
+				oncommand="ec2ui_session.displayAbout();" tooltiptext="&ec2ui.about.tip;" />
+		</toolbar>
+
+		<spacer style="height: 4px" />
+
+		<tabbox id="ec2ui.primary.tabs" selectedIndex="0" flex="1">
+			<tabs>
+				<tab label="&ec2ui.tabs.images.label;" />
+				<tab label="&ec2ui.tabs.keypairs.label;" />
+				<tab label="&ec2ui.tabs.secgroups.label;" />
+			</tabs>
+			<tabpanels flex="1">
+				<tabpanel id="amis_tab"/>
+				<tabpanel id="keypairs_tab"/>
+				<tabpanel id="security_groups_tab"/>
+			</tabpanels>
+		</tabbox>
+
+	</vbox>
+</window>

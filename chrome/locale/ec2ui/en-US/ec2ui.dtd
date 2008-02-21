@@ -1,0 +1,81 @@
+<!ENTITY ec2ui.credentials.manage.label "Credentials">
+<!ENTITY ec2ui.tools.manage.label "Tools">
+<!ENTITY ec2ui.accountids.manage.label "Account IDs">
+<!ENTITY ec2ui.about.label "About">
+
+<!ENTITY ec2ui.credentials.tip "Manage AWS credentials for accessing Amazon EC2">
+<!ENTITY ec2ui.tools.tip "Manage local tools">
+<!ENTITY ec2ui.accountids.tip "Configure friendler names for known EC2 account IDs">
+<!ENTITY ec2ui.about.tip "All about this extension">
+
+<!ENTITY ec2ui.tabs.images.label "AMIs and Instances">
+<!ENTITY ec2ui.tabs.keypairs.label "KeyPairs">
+<!ENTITY ec2ui.tabs.secgroups.label "Security Groups">
+
+<!ENTITY ec2ui.captions.images.images.label "Available AMIs">
+<!ENTITY ec2ui.captions.images.attribs.label "Launch Permissions">
+<!ENTITY ec2ui.captions.images.instances.label "Your Instances">
+<!ENTITY ec2ui.captions.images.launchsecgroups.label "Security Groups">
+<!ENTITY ec2ui.captions.images.launchparams.label "User Data">
+
+<!ENTITY ec2ui.refresh.tip "Refresh">
+
+<!ENTITY ec2ui.images.powerup.tip "Launch Instance(s)">
+<!ENTITY ec2ui.images.register.tip "Register AMI">
+<!ENTITY ec2ui.images.deregister.tip "Deregister AMI">
+
+<!ENTITY ec2ui.images.id.label "AMI ID">
+<!ENTITY ec2ui.images.manifest.label "Manifest">
+<!ENTITY ec2ui.images.state.label "State">
+<!ENTITY ec2ui.images.owner.label "Owner">
+<!ENTITY ec2ui.images.visibility.label "Visibility">
+
+
+<!ENTITY ec2ui.launchperms.add.tip "Allow new user to launch this AMI">
+<!ENTITY ec2ui.launchperms.remove.tip "Revoke launch permissions for the selected user">
+<!ENTITY ec2ui.launchperms.public.tip "Allow any user to launch this AMI">
+<!ENTITY ec2ui.launchperms.reset.tip "Reset to defaults">
+
+<!ENTITY ec2ui.instances.reboot.tip "Reboot Selected Instances">
+<!ENTITY ec2ui.instances.powerdown.tip "Terminate Selected Instances">
+<!ENTITY ec2ui.instances.console.tip "Show Console Output">
+<!ENTITY ec2ui.instances.ssh.tip "Open SSH Connection">
+
+<!ENTITY ec2ui.instances.resid.label "Reservation ID">
+<!ENTITY ec2ui.instances.owner.label "Owner">
+<!ENTITY ec2ui.instances.groups.label "Groups">
+<!ENTITY ec2ui.instances.id.label "Instance ID">
+<!ENTITY ec2ui.instances.imageId.label "AMI">
+<!ENTITY ec2ui.instances.state.label "State">
+<!ENTITY ec2ui.instances.publicDnsName.label "Public DNS">
+<!ENTITY ec2ui.instances.privateDnsName.label "Private DNS">
+<!ENTITY ec2ui.instances.keyName.label "Key">
+<!ENTITY ec2ui.instances.reason.label "Reason">
+<!ENTITY ec2ui.instances.amiLaunchIdx.label "Idx">
+<!ENTITY ec2ui.instances.instanceType.label "Type">
+<!ENTITY ec2ui.instances.launchTime.label "Local Launch Time">
+
+<!ENTITY ec2ui.keypairs.create.tip "Create a new keypair">
+<!ENTITY ec2ui.keypairs.delete.tip "Delete selected keypair">
+
+<!ENTITY ec2ui.keypairs.name.label "Name">
+<!ENTITY ec2ui.keypairs.fingerprint.label "Fingerprint">
+
+<!ENTITY ec2ui.captions.secgroups.groups.label "Your Groups">
+<!ENTITY ec2ui.captions.secgroups.permissions.label "Group Permissions">
+
+<!ENTITY ec2ui.secgroups.create.tip "Create Security Group">
+<!ENTITY ec2ui.secgroups.delete.tip "Delete Selected Group">
+
+<!ENTITY ec2ui.secgroups.ownerId.label "Owner">
+<!ENTITY ec2ui.secgroups.name.label "Name">
+<!ENTITY ec2ui.secgroups.description.label "Description">
+
+<!ENTITY ec2ui.permissions.authorize.tip "Grant Permission">
+<!ENTITY ec2ui.permissions.revoke.tip "Revoke Permission">
+
+<!ENTITY ec2ui.permissions.protocol.label "Protocol">
+<!ENTITY ec2ui.permissions.fromport.label "From Port/ICMP Type">
+<!ENTITY ec2ui.permissions.toport.label "To Port/ICMP Code">
+<!ENTITY ec2ui.permissions.groups.label "Source User:Group">
+<!ENTITY ec2ui.permissions.cidrs.label "Source CIDR">

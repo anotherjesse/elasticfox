@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://ec2ui/skin/ec2ui.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<tabpanel id="amis_tab" flex="1">
+		<vbox flex="1">
+			<hbox flex="1">
+				<groupbox flex="9">
+					<caption label="&ec2ui.captions.images.images.label;" />
+					<vbox flex="1">
+						<popupset>
+							<popup id="ec2ui.images.contextmenu">
+								<menuitem oncommand="ec2ui_AMITreeView.registerNewImage();" label="Register a new AMI" />
+								<menuitem oncommand="ec2ui_AMITreeView.deregisterImage();" label="Deregister this AMI" />
+								<menuseparator />
+								<menuitem oncommand="ec2ui_AMITreeView.launchNewInstances();"
+									label="Launch instance(s) of this AMI" />
+							</popup>
+						</popupset>
+						<toolbar style="padding: 0px 3px; -moz-box-align: center">
+							<toolbarbutton image="images/refresh.png"
+								style="-moz-box-orient:horizontal;-moz-box-pack:center;" oncommand="ec2ui_AMITreeView.refresh()"
+								tooltiptext="&ec2ui.refresh.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/powerup.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_AMITreeView.launchNewInstances();" tooltiptext="&ec2ui.images.powerup.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/registerami.png" tooltiptext="&ec2ui.images.register.tip;"
+								oncommand="ec2ui_AMITreeView.registerNewImage();" />
+							<toolbarseparator />
+							<toolbarbutton image="images/deregisterami.png" tooltiptext="&ec2ui.images.deregister.tip;"
+								oncommand="ec2ui_AMITreeView.deregisterImage();" />
+							<toolbarseparator />
+						</toolbar>
+						<tree id="ec2ui.images.view" seltype="single" enableColumnDrag="true"
+							ondblclick="ec2ui_AMITreeView.viewDetails(event)" 
+							onselect="ec2ui_AMITreeView.selectionChanged(event)" flex="1">
+							<treecols>
+								<treecol id="ami.id" label="&ec2ui.images.id.label;" flex="1" sortDirection="ascending"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="ami.location" label="&ec2ui.images.manifest.label;" flex="3"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="ami.state" label="&ec2ui.images.state.label;" flex="1"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="ami.owner" label="&ec2ui.images.owner.label;" flex="1"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="ami.isPublic" label="&ec2ui.images.visibility.label;" flex="1"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+							</treecols>
+							<treechildren context="ec2ui.images.contextmenu"/>
+						</tree>
+					</vbox>
+				</groupbox>
+				<splitter style="max-width: 4px; height: 4px;" persist="state" collapse="after"
+					resizebefore="closest">
+					<grippy />
+				</splitter>
+				<groupbox flex="1">
+					<caption label="&ec2ui.captions.images.attribs.label;" />
+					<vbox flex="1">
+						<toolbar style="padding: 0px 3px; -moz-box-align: center">
+							<toolbarbutton image="images/refresh.png"
+								style="-moz-box-orient:horizontal;-moz-box-pack:center;"
+								oncommand="ec2ui_AMITreeView.refreshLaunchPermissions()" tooltiptext="&ec2ui.refresh.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/addlaunchperm.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_AMITreeView.addLaunchPermission();" tooltiptext="&ec2ui.launchperms.add.tip;" />
+							<toolbarbutton image="images/removelaunchperm.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_AMITreeView.removeLaunchPermission();" tooltiptext="&ec2ui.launchperms.remove.tip;" />
+							<toolbarbutton image="images/makeamipublic.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_AMITreeView.addGlobalLaunchPermission();" tooltiptext="&ec2ui.launchperms.public.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/resetlaunchperms.png" style="-moz-box-pack:center;"
+								tooltiptext="&ec2ui.launchperms.reset.tip;" oncommand="ec2ui_AMITreeView.resetLaunchPermissions();" />
+						</toolbar>
+						<listbox id="ec2ui.launchpermissions.list" seltype="single" rows="4" flex="1" />
+					</vbox>
+				</groupbox>
+			</hbox>
+			<splitter style="width: 4px; max-height: 4px;" persist="state" collapse="after" resizebefore="closest">
+				<grippy />
+			</splitter>
+			<groupbox flex="1">
+				<caption label="&ec2ui.captions.images.instances.label;" />
+				<hbox flex="1">
+					<vbox flex="2">
+						<popupset>
+							<popup id="ec2ui.instances.contextmenu">
+								<menuitem oncommand="ec2ui_InstancesTreeView.launchMore();"
+									label="Launch more of these" />
+								<menuseparator />
+								<menuitem oncommand="ec2ui_InstancesTreeView.rebootInstance();"
+									label="Reboot this instance" />
+								<menuitem oncommand="ec2ui_InstancesTreeView.terminateInstance();"
+									label="Terminate this instance" />
+								<menuseparator />
+								<menuitem oncommand="ec2ui_InstancesTreeView.fetchConsoleOutput();"
+									label="Show console output" />
+								<menuseparator />
+								<menuitem oncommand="ec2ui_InstancesTreeView.copyToClipBoard('id');"
+									label="Copy Instance ID to clipboard" />
+								<menuitem oncommand="ec2ui_InstancesTreeView.copyToClipBoard('publicDnsName');"
+									label="Copy Public DNS Name to clipboard" />
+								<menuitem oncommand="ec2ui_InstancesTreeView.copyToClipBoard('privateDnsName');"
+									label="Copy Private DNS Name to clipboard" />
+								<menuseparator />
+								<menuitem oncommand="ec2ui_InstancesTreeView.sshTo('publicDnsName');"
+									label="SSH to Public DNS Name" />
+							</popup>
+						</popupset>
+						<toolbar style="padding: 0px 3px; -moz-box-align: center">
+							<toolbarbutton image="images/refresh.png" oncommand="ec2ui_InstancesTreeView.refresh()"
+								tooltiptext="&ec2ui.refresh.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/reboot.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_InstancesTreeView.rebootInstance();" tooltiptext="&ec2ui.instances.reboot.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/powerdown.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_InstancesTreeView.terminateInstance();" tooltiptext="&ec2ui.instances.powerdown.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/get_console_output.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_InstancesTreeView.fetchConsoleOutput();" tooltiptext="&ec2ui.instances.console.tip;" />
+							<toolbarseparator />
+							<toolbarbutton image="images/ssh.png" style="-moz-box-pack:center;"
+								oncommand="ec2ui_InstancesTreeView.sshTo('publicDnsName');" tooltiptext="&ec2ui.instances.ssh.tip;" />
+							<toolbarseparator />
+						</toolbar>
+						<tree id="ec2ui.instances.view" ondblclick="ec2ui_InstancesTreeView.viewDetails(event)" onselect="ec2ui_InstancesTreeView.selectionChanged(event)" enableColumnDrag="true" flex="1">
+							<treecols>
+								<treecol id="instance.resId" label="&ec2ui.instances.resid.label;" flex="2"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.ownerId" label="&ec2ui.instances.owner.label;" flex="2"
+									sortDirection="ascending" persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.id" label="&ec2ui.instances.id.label;" flex="2"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.imageId" label="&ec2ui.instances.imageId.label;" flex="2"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.state" label="&ec2ui.instances.state.label;" flex="3"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.publicDnsName" label="&ec2ui.instances.publicDnsName.label;" flex="9"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.privateDnsName" label="&ec2ui.instances.privateDnsName.label;" flex="9"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.keyName" label="&ec2ui.instances.keyName.label;" flex="3"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.groups" label="&ec2ui.instances.groups.label;" flex="5"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.reason" label="&ec2ui.instances.reason.label;" flex="7"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.amiLaunchIdx" label="&ec2ui.instances.amiLaunchIdx.label;" flex="1"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.instanceType" label="&ec2ui.instances.instanceType.label;" flex="1"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+								<treecol id="instance.launchTimeDisp" label="&ec2ui.instances.launchTime.label;" flex="2"
+									persist="width ordinal hidden sortDirection" />
+								<splitter class="tree-splitter" />
+							</treecols>
+							<treechildren context="ec2ui.instances.contextmenu" />
+						</tree>
+					</vbox>
+					<splitter style="width: 4px; max-width: 4px;" collapse="after" persist="true" resizebefore="closest"
+						resizeafter="farthest">
+						<grippy id="leftgrippy" />
+					</splitter>
+				</hbox>
+			</groupbox>
+		</vbox>
+	</tabpanel>
+</overlay>

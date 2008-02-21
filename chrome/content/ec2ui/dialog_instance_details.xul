@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+
+<dialog id="ec2ui.dialog.instance.detail" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="accept" ondialogaccept="return true;"
+	onload="ec2_InstanceDetails.init();" title="Instance Details">
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/instancedetaildialog.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/model.js" />
+
+	<vbox flex="1">
+		<grid flex="1">
+			<columns>
+				<column />
+				<column />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label control="ec2ui.instance.resid" value="Reservation ID:" />
+					<textbox id="ec2ui.instance.resid" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.instanceid" value="Instance ID:" />
+					<textbox id="ec2ui.instance.instanceid" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.amiid" value="AMI ID:" />
+					<textbox id="ec2ui.instance.amiid" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.ownerid" value="Owner ID:" />
+					<textbox id="ec2ui.instance.ownerid" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.dnsname" value="Public DNS Name:" />
+					<textbox id="ec2ui.instance.publicdnsname" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.dnsname" value="Private DNS Name:" />
+					<textbox id="ec2ui.instance.privatednsname" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.keyname" value="Key Name:" />
+					<textbox id="ec2ui.instance.keyname" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.securitygrouplist" value="Security Groups:" />
+					<listbox id="ec2ui.instance.securitygrouplist" seltype="single" rows="4" flex="1" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.reason" value="Last Reason:" />
+					<textbox id="ec2ui.instance.reason" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.amiLaunchIdx" value="AMI Launch Index:" />
+					<textbox id="ec2ui.instance.amiLaunchIdx" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.instanceType" value="Instance Type:" />
+					<textbox id="ec2ui.instance.instanceType" size="50" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.instance.launchTime" value="Launch Time:" />
+					<textbox id="ec2ui.instance.launchTime" size="50" readonly="true" />
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</dialog>
+

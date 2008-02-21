@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://ec2ui/locale/ec2ui.dtd">
+
+<dialog id="ec2ui.dialog.newinstances" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="accept,cancel" ondialogaccept="return ec2_InstanceLauncher.launch();" ondialogcancel="return true;"
+	onload="ec2_InstanceLauncher.init();" title="Launch new instance(s)" buttonlabelaccept="Launch">
+
+	<script type="application/x-javascript" src="chrome://ec2ui/content/newinstancesdialog.js" />
+	<script type="application/x-javascript" src="chrome://ec2ui/content/model.js" />
+
+	<vbox flex="1">
+		<grid flex="1">
+			<columns>
+				<column />
+				<column />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label control="ec2ui.newinstances.ami" value="AMI ID:" />
+					<textbox id="ec2ui.newinstances.ami" size="40" value="1" readonly="true" />
+				</row>
+				<row>
+					<label control="ec2ui.newinstances.instancetypelist" value="Instance Type:" />
+					<menulist id="ec2ui.newinstances.instancetypelist" />
+				</row>
+				<row>
+					<label control="ec2ui.newinstances.min" value="Minimum number of instances:" />
+					<textbox id="ec2ui.newinstances.min" size="40" value="1" />
+				</row>
+				<row>
+					<label control="ec2ui.newinstances.max" value="Maximum number of instances:" />
+					<textbox id="ec2ui.newinstances.max" size="40" value="1" />
+				</row>
+				<row>
+					<label control="ec2ui.newinstances.keypairlist" value="KeyPair:" />
+					<menulist id="ec2ui.newinstances.keypairlist" />
+				</row>
+				<row>
+					<label control="ec2ui.newinstances.properties" value="Additional Info:" />
+					<textbox id="ec2ui.newinstances.properties" size="40" />
+				</row>
+				<groupbox flex="1">
+					<caption label="&ec2ui.captions.images.launchsecgroups.label;" />
+					<grid flex="1">
+						<columns>
+							<column />
+							<column />
+							<column />
+						</columns>
+						<rows>
+							<row>
+								<label control="ec2ui.newinstances.secgroups.unused" value="Available Groups" />
+								<spacer flex="1" />
+								<label control="ec2ui.newinstances.secgroups.used" value="Launch in" />
+							</row>
+							<row>
+								<listbox rows="3" id="ec2ui.newinstances.secgroups.unused" seltype="multiple">
+									<listcols>
+										<listcol flex="1" />
+									</listcols>
+								</listbox>
+								<vbox flex="1" pack="center">
+									<button image="images/right.png"
+										oncommand="ec2_InstanceLauncher.addSecurityGroup();" />
+									<button image="images/left.png"
+										oncommand="ec2_InstanceLauncher.removeSecurityGroup();" />
+								</vbox>
+								<listbox rows="3" id="ec2ui.newinstances.secgroups.used" seltype="multiple">
+									<listcols>
+										<listcol flex="1" />
+									</listcols>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox flex="1">
+					<caption label="&ec2ui.captions.images.launchparams.label;" />
+					<textbox id="ec2ui.newinstances.userdata" multiline="true" cols="50" rows="4" wrap="false"
+						style="font-family: monospace;" />
+					<hbox pack="end" flex="1">
+						<button label="Open File" oncommand="ec2_InstanceLauncher.loadUserDataFromFile();" />
+					</hbox>
+				</groupbox>
+			</rows>
+		</grid>
+	</vbox>
+</dialog>
+
